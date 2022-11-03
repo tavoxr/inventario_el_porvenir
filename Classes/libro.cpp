@@ -7,26 +7,32 @@ int Libro::Id=0;
 
 //Default Constructor
 Libro::Libro(){
+	IdLibro = 0;
 	Titulo = "";
 	Autor = "";
 	Costo = 0;
-	Precio = 0;
+	PrecioVenta = 0;
+	PrecioPrestamo = 0;
 	Stock = 0;
 	Editorial = "";
 	FechaCopy = "";
+	Categoria = "";
 }
 
 
 //Constructor
-Libro::Libro(std::string titulo, std::string autor, float costo, float precio, int stock, std::string editorial, std::string fechaCopy){
+Libro::Libro(std::string titulo, std::string autor, float costo, float precio_venta,float precio_prestamo, int stock, std::string editorial, std::string fechaCopy, std::string categoria ){
 	Id++;
+	IdLibro = Id;
 	Titulo = titulo;
 	Autor = autor;
 	Costo = costo;
-	Precio = precio;
+	PrecioVenta = precio_venta;
+	PrecioPrestamo = precio_prestamo;
 	Stock = stock;
 	Editorial = editorial;
 	FechaCopy = fechaCopy;
+	Categoria = categoria;
 	
 }
 
@@ -36,7 +42,7 @@ Libro::Libro(std::string titulo, std::string autor, float costo, float precio, i
 
 int Libro::getId(){
 	
-	return Id;
+	return IdLibro;
 }
 
 
@@ -71,14 +77,21 @@ float Libro::getCosto(){
 }
 
 
-//Precio
-void Libro::setPrecio(float precio){
-	Precio = precio;
+//Precio Venta
+void Libro::setPrecioVenta(float precio_venta){
+	PrecioVenta = precio_venta;
 }
-float Libro::getPrecio(){
-	return Precio;
+float Libro::getPrecioVenta(){
+	return PrecioVenta;
 }
 
+//Precio Prestamo
+void Libro::setPrecioPrestamo(float precio_prestamo){
+	PrecioPrestamo = precio_prestamo;
+}
+float Libro::getPrecioPrestamo(){
+	return PrecioPrestamo;
+}
 
 //Stock
 void Libro::setStock(int stock){
@@ -109,6 +122,15 @@ std::string Libro::getFechaCopy(){
 	return FechaCopy;
 }
 
+//Categoria
+void   Libro::setCategoria(std::string categoria){
+	Categoria = categoria;
+}
+
+std::string Libro::getCategoria(){
+	return  Categoria;
+}
+
 //===============================================================================================================================================================
 //															END OF GETTERS & SETTERS
 //===============================================================================================================================================================
@@ -121,8 +143,8 @@ std::string Libro::getFechaCopy(){
 Libro Libro::agregarLibro(){
 		
 		//Declaracion variables
-		std::string titulo, autor, editorial,fechaCopy;
-		float costo, precio;
+		std::string titulo, autor, editorial,fechaCopy, categoria;
+		float costo, precio_venta, precio_prestamo;
 		int stock;
 		
 		//Obtener datos de libro-------------------------------------------------
@@ -133,18 +155,21 @@ Libro Libro::agregarLibro(){
 		
 		
 		std::cout << "Titulo: ";
-		std::cin.ignore();
+		std::cin.ignore(0, '\n');
 		getline(std::cin, titulo);
 		
 		std::cout << "Autor: ";
-		std::cin.ignore();
+		std::cin.ignore(0, '\n');
 		getline(std::cin,autor);
 		
 		std::cout << "Costo: ";
 		std::cin >> costo;
 		
-		std::cout << "Precio: ";
-		std::cin >> precio;
+		std::cout << "Precio de Venta: ";
+		std::cin >> precio_venta;
+		
+		std::cout << "Precio de Prestamo: ";
+		std::cin >> precio_prestamo;
 		
 		std::cout << "Stock: ";
 		std::cin >> stock;
@@ -154,19 +179,22 @@ Libro Libro::agregarLibro(){
 		getline(std::cin,editorial);
 		
 		std::cout << "FechaCopy: ";
-		std::cin.ignore();
+		std::cin.ignore(0, '\n');
 		getline(std::cin,fechaCopy);
+		
+		std::cout << "Categoria: ";
+		std::cin.ignore(0, '\n');
+		getline(std::cin,categoria);
 		//--------------------------------------------------
 		
 		system("cls"); //Limpiar Pantalla
 		
-		Libro libroNuevo = Libro(titulo,autor,costo,precio,stock,editorial,fechaCopy); //Crear objeto nuevo
+		Libro libroNuevo = Libro(titulo,autor,costo,precio_venta,precio_prestamo,stock,editorial,fechaCopy,categoria); //Crear objeto nuevo
 		
 		
 		return libroNuevo; //Retornar objeto libro creado
 	
 }
-
 
 
 

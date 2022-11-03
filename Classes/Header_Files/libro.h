@@ -8,13 +8,16 @@ class Libro
 	
 	private: 
 		static int Id;
+		int IdLibro;
 		std::string Titulo;
 		std::string Autor;
 		float  Costo;
-		float Precio;
+		float PrecioVenta;
+		float PrecioPrestamo;
 		int   Stock;
 		std::string Editorial;
 		std::string FechaCopy;
+		std::string Categoria;
 		
 			
 		
@@ -24,7 +27,7 @@ class Libro
 		Libro();
 		
 		//Custom Constructor
-		Libro(std::string titulo, std::string autor, float costo, float precio, int stock, std::string editorial, std::string fechaCopy  );
+		Libro(std::string titulo, std::string autor, float costo, float precioVenta,float precioPrestamo, int stock, std::string editorial, std::string fechaCopy, std::string categoria  );
 		
 		//Id
 		int getId();
@@ -41,9 +44,13 @@ class Libro
 		void setCosto(float);
 		float getCosto();
 		
-		//Precio
-		void setPrecio(float);
-		float getPrecio();
+		//Precio Venta
+		void setPrecioVenta(float);
+		float getPrecioVenta();
+		
+		//Precio Prestamo
+		void setPrecioPrestamo(float);
+		float getPrecioPrestamo();
 		
 		//Stock
 		void setStock(int);
@@ -57,8 +64,18 @@ class Libro
 		void setFechaCopy(std::string);
 		std::string getFechaCopy();
 		
+		//Categoria
+		void setCategoria(std::string);
+		std::string getCategoria();
+		
+		
+		//--------Metodos ------------------
+		
 		//Agregar Libro
 		Libro agregarLibro();
+		
+		//Editar Libro
+		Libro editarLibro();
 		
 };
 

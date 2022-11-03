@@ -5,8 +5,9 @@ class Cliente
 {
 		private: 
 			static int Id;
+			int IdCliente;
 			std::string Nombre;
-			std::string Dpi;
+			std::string NIT;
 			int  Edad;
 			std::string Telefono;
 			
@@ -16,7 +17,7 @@ class Cliente
 			Cliente();
 			
 			//Custom Constructor
-			Cliente(std::string nombre, std::string dpi, int edad, std::string telefono);
+			Cliente(std::string nombre, std::string nit, int edad, std::string telefono);
 			
 			//===========================================================================================
 			//								Getters & Setters
@@ -28,9 +29,9 @@ class Cliente
 			void setNombre(std::string);
 			std::string getNombre();
 				
-			//DPI
-			void setDpi(std::string);
-			std::string getDpi();
+			//NIT
+			void setNIT(std::string);
+			std::string getNIT();
 			
 			//Edad
 			void setEdad(int);

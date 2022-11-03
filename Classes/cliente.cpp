@@ -12,7 +12,7 @@ int Cliente::Id = 0;
 Cliente::Cliente(){
 	
 	Nombre = "";
-	Dpi = "";
+	NIT = "";
 	Edad = 0;
 	Telefono = "";
 	
@@ -20,10 +20,11 @@ Cliente::Cliente(){
 
 
 //Custom Constructor
-Cliente::Cliente(std::string nombre, std::string dpi, int edad, std::string telefono){
+Cliente::Cliente(std::string nombre, std::string nit, int edad, std::string telefono){
 	Id++;
+	IdCliente = Id;
 	Nombre =  nombre;
-	Dpi =  dpi;
+	NIT =  nit;
 	Edad = edad;
 	Telefono = telefono;
 	
@@ -37,7 +38,7 @@ Cliente::Cliente(std::string nombre, std::string dpi, int edad, std::string tele
 
 // Id
 	int Cliente::getId(){
-		return Id;
+		return IdCliente;
 	}
 	
 //Nombre
@@ -52,12 +53,12 @@ Cliente::Cliente(std::string nombre, std::string dpi, int edad, std::string tele
 
 
 //Dpi
-	void Cliente::setDpi(std::string dpi){
-		Dpi =  dpi;
+	void Cliente::setNIT(std::string nit){
+		NIT =  nit;
 	}
 	
-	std::string Cliente::getDpi(){
-		return Dpi;
+	std::string Cliente::getNIT(){
+		return NIT;
 	}
 
 //Edad

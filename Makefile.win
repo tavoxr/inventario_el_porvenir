@@ -4,14 +4,14 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o Classes/libro.o Classes/detallefactura.o Classes/cliente.o Classes/factura.o
-LINKOBJ  = main.o Classes/libro.o Classes/detallefactura.o Classes/cliente.o Classes/factura.o
+OBJ      = main.o Classes/libro.o Classes/cliente.o Classes/pedido.o Classes/detallepedido.o Classes/usuario.o
+LINKOBJ  = main.o Classes/libro.o Classes/cliente.o Classes/pedido.o Classes/detallepedido.o Classes/usuario.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.7.1/include/c++"
 BIN      = Inventario_El_Porvenir.exe
-CXXFLAGS = $(CXXINCS) 
-CFLAGS   = $(INCS) 
+CXXFLAGS = $(CXXINCS) -std=c++11
+CFLAGS   = $(INCS) -std=c++11
 RM       = rm -f
 
 .PHONY: all all-before all-after clean clean-custom
@@ -30,11 +30,14 @@ main.o: main.cpp
 Classes/libro.o: Classes/libro.cpp
 	$(CPP) -c Classes/libro.cpp -o Classes/libro.o $(CXXFLAGS)
 
-Classes/detallefactura.o: Classes/detallefactura.cpp
-	$(CPP) -c Classes/detallefactura.cpp -o Classes/detallefactura.o $(CXXFLAGS)
-
 Classes/cliente.o: Classes/cliente.cpp
 	$(CPP) -c Classes/cliente.cpp -o Classes/cliente.o $(CXXFLAGS)
 
-Classes/factura.o: Classes/factura.cpp
-	$(CPP) -c Classes/factura.cpp -o Classes/factura.o $(CXXFLAGS)
+Classes/pedido.o: Classes/pedido.cpp
+	$(CPP) -c Classes/pedido.cpp -o Classes/pedido.o $(CXXFLAGS)
+
+Classes/detallepedido.o: Classes/detallepedido.cpp
+	$(CPP) -c Classes/detallepedido.cpp -o Classes/detallepedido.o $(CXXFLAGS)
+
+Classes/usuario.o: Classes/usuario.cpp
+	$(CPP) -c Classes/usuario.cpp -o Classes/usuario.o $(CXXFLAGS)
