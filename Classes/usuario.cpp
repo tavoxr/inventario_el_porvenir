@@ -9,6 +9,7 @@ int Usuario::Id = 0;
 //Default Constructor
 Usuario::Usuario(){
 	NombreUsuario =  "";
+	Correo = "";
 	Telefono =  "";
 	Password = "";
 	DPI = "";
@@ -19,10 +20,11 @@ Usuario::Usuario(){
 
 //Custom Constructor
 
-Usuario::Usuario(std::string nombre_usuario,std::string telefono, std::string password,std::string dpi, int tipo_rol){
+Usuario::Usuario(std::string nombre_usuario,std::string correo,std::string telefono, std::string password,std::string dpi, int tipo_rol){
 	Id++;
 	IdUsuario = Id;
 	NombreUsuario =  nombre_usuario;
+	Correo = correo;
 	Telefono =  telefono;
 	Password = password;
 	DPI = dpi;
@@ -100,6 +102,59 @@ int Usuario::getTipoRol(){
 	return TipoRol;
 }	
 	
+
+//=============================================================================================================================================================
+//															METHODS
+//=============================================================================================================================================================
+
+
+Usuario Usuario::crearUsuario(){
+	
+	
+		//Declaracion variables
+			std::string nombre_usuario, correo, telefono, password, dpi;
+			int tipo_rol;
+	
+		//Obtener datos de Usuario-------------------------------------------------
+		std::cout << "===============================" << std::endl;
+		std::cout << "Agregar Nuevo Usuario" << std::endl;
+		std::cout << "===============================" << std::endl << std::endl;
+		
+		
+		std::cout << "Nombre: ";
+		std::cin.ignore(0, '\n');
+		getline(std::cin, nombre_usuario);
+		
+		std::cout << "Correo: ";
+		std::cin.ignore(0, '\n');
+		getline(std::cin,correo);
+		
+		std::cout << "Telefono: ";
+		std::cin.ignore(0, '\n');
+		getline(std::cin,telefono);
+		
+		std::cout << "Password: ";
+		std::cin.ignore(0, '\n');
+		getline(std::cin,password);
+		
+		std::cout << "DPI: ";
+		std::cin.ignore(0, '\n');
+		getline(std::cin,dpi);
+		
+		std::cout << "Tipo_Rol: ";
+		std::cin.ignore(0, '\n');
+		std::cin >> tipo_rol;
+	
+	
+	
+		system("cls"); //Limpiar Pantalla
+		
+		Usuario usuarioNuevo = Usuario(nombre_usuario, correo, telefono,password,dpi,tipo_rol); // Usuario Nuevo
+		
+		return usuarioNuevo;
+	
+}
+
 
 
 
