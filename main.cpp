@@ -106,6 +106,77 @@ void agregarArchivoUsuarios(ofstream &archivo, CatalogoUsuarios catalogoUsuarios
 	
 }
 
+/*
+void librosArchivo(ofstream &archivo, CatalogoLibros catalogoLibros){
+
+archivo.open("Catalogo_Usuarios.txt", ios::out | ios::app);
+	
+
+		for(int i =0; i < catalogoLibros.libros.size(); i++){
+			
+			
+			archivo << catalogoUsuarios.usuarios[i].getNombreUsuario() << " " << catalogoUsuarios.usuarios[i].getCorreo()  << " "   << catalogoUsuarios.usuarios[i].getTelefono() << " " <<catalogoUsuarios.usuarios[i].getPassword() << " " << catalogoUsuarios.usuarios[i].getDPI() << " " << catalogoUsuarios.usuarios[i].getTipoRol() << "\n";
+			
+			
+		}
+	
+		
+		//archivo << nombre_usuario << "-" << telefono << "-" <<password << "-" << dpi << "-" << tipo_rol << "\n";
+		archivo.close();
+
+}
+*/
+void clientesArchivo(ofstream &archivo, CatalogoClientes catalogoClientes){
+archivo.open("Catalogo_Clientes.txt", ios::out | ios::app);
+	
+
+		for(int i =0; i < catalogoClientes.clientes.size(); i++){
+			
+			
+			archivo << catalogoClientes.clientes[i].getNombre() << " " << catalogoClientes.clientes[i].getNIT()  << " "   << catalogoClientes.clientes[i].getEdad() << " " <<catalogoClientes.clientes[i].getTelefono() << "\n";
+			
+			
+		}
+	
+		
+		//archivo << nombre_usuario << "-" << telefono << "-" <<password << "-" << dpi << "-" << tipo_rol << "\n";
+		archivo.close();
+
+
+}
+
+void pedidosArchivo(ofstream &archivo, CatalogoPedidos catalogoPedidos){
+	archivo.open("Catalogo_Pedidos.txt", ios::out | ios::app);
+	
+
+		for(int i =0; i < catalogoPedidos.pedidos.size(); i++){
+			
+			std::string tipo;
+		
+		 if(catalogoPedidos.pedidos[i].getTipoOrden() == 1){ 
+		  tipo = " Prestamo"; 
+		 } 
+		 else{ 
+		  tipo =  " Venta ";
+		 };
+			
+			
+			archivo << catalogoPedidos.pedidos[i].getIdLibro() << " " << catalogoPedidos.pedidos[i].getIdCliente()  << " "   << tipo << " " <<catalogoPedidos.pedidos[i].getCantidad() << " " << catalogoPedidos.pedidos[i].getSubTotal() << " " << catalogoPedidos.pedidos[i].getIva() << " " << catalogoPedidos.pedidos[i].getPrecioTotal() << "\n";
+			
+			
+		}
+	
+		
+		//archivo << nombre_usuario << "-" << telefono << "-" <<password << "-" << dpi << "-" << tipo_rol << "\n";
+		archivo.close();
+
+
+}
+
+
+
+
+
 void leerUsuarios(ifstream &lectura, CatalogoUsuarios catalogoUsuarios){
 	
 	std::string nombre_usuario;
@@ -144,8 +215,16 @@ void leerUsuarios(ifstream &lectura, CatalogoUsuarios catalogoUsuarios){
 }
 
 
+
+
+
 int main() {
 	ofstream Archivo;
+	ofstream librosArchivo;
+	ofstream clientesArchivo;
+	ofstream pedidosArchivo;
+	
+	
 	ifstream Lectura;
 	
 	
@@ -930,7 +1009,8 @@ int main() {
 			
 			
 					agregarArchivoUsuarios(Archivo, catalogoUsuarios);
-			
+				//	pedidosArchivo(pedidosArchivo,  catalogoPedidos);
+				//	clientesArchivo(clientesArchivo , catalogoClientes);
 					system("cls");
 					cout << "salir" << endl;
 				break;
