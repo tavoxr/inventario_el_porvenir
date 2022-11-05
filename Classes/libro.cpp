@@ -155,7 +155,7 @@ Libro Libro::agregarLibro(){
 		
 		
 		std::cout << "Titulo: ";
-		std::cin.ignore(0, '\n');
+		std::cin.ignore();
 		getline(std::cin, titulo);
 		
 		std::cout << "Autor: ";

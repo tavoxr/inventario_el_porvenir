@@ -92,7 +92,7 @@ void CatalogoUsuarios::editarUsuarios(int id){
 			
 			
 			std::cout << "Nombre: ";
-			std::cin.ignore(0, '\n');
+			std::cin.ignore();
 			getline(std::cin, nombre_usuario);
 			
 			std::cout << "Correo: ";

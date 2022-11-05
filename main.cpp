@@ -9,6 +9,7 @@
 
 #include "Modulos/Catalogo_Usuarios/catalogousuarios.h"
 #include "Modulos/Catalogo_Clientes/catalogoclientes.h"
+#include "Modulos/Catalogo_Libros/catalogolibros.h"
 
 #include <fstream>
 using namespace std;
@@ -106,6 +107,7 @@ int main() {
 	//declaracion de variables
 	CatalogoUsuarios catalogoUsuarios;
 	CatalogoClientes catalogoClientes;
+	CatalogoLibros catalogoLibros;
 	
 	
 	
@@ -281,6 +283,10 @@ int main() {
 								case 2:{ // CATALOGO LIBROS
 								
 										int opcionCatalogoLibros = 0;
+										
+										while(opcionCatalogoLibros !=5 ){
+								
+									
 										//Catalogo Usuarios						
 										cout << "========================================" << endl;
 										cout << "      Catalogo Libros" << endl;
@@ -299,26 +305,81 @@ int main() {
 											
 												case 1: {
 													
+														int opcionSubmenu = 2;
+														do{
+														
+														catalogoLibros.listarLibros();
+														
+														//====================================================================================================================	
+														//								SUBMENU
+														//=====================================================================================================================
+														cout << "==========================================================================" << endl;
+														cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
+														cout << "==========================================================================" << endl <<endl;
+														cout << " Seleccione una opcion: " << endl; 
+														
+														opcionSubmenu =  fnValidateIntegerSubmenu();
+														
+															system("cls");
+														}while(opcionSubmenu !=0);
 													
-													
+					
 													break;
 												}
 												case 2:{
+														
+														int opcionSubmenu = 2;
+														do{
+														
+														catalogoLibros.agregarLibro();
+														
+														
+														//====================================================================================================================	
+														//								SUBMENU
+														//=====================================================================================================================
+														cout << "==========================================================================" << endl;
+														cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
+														cout << "==========================================================================" << endl <<endl;
+														cout << " Seleccione una opcion: " << endl; 
+														
+														opcionSubmenu =  fnValidateIntegerSubmenu();
+														
+															system("cls");
+														}while(opcionSubmenu !=0);
 													
-													
+		
 												
 													break;
 												}
 												case 3:{
-																						
-													
-													
-													
-													
-													
-													
-													
-													
+														int opcionSubmenu = 2;
+														int opcionEditarLibro= 0;
+														
+														do{
+														
+															catalogoLibros.listarLibros();
+															
+															
+															cout << "Selecciona el Id del libro a editar: " << endl;
+															opcionEditarLibro =  fnValidateInteger();
+															
+															catalogoLibros.editarLibro(opcionEditarLibro);
+															
+														
+															
+															//====================================================================================================================	
+															//								SUBMENU
+															//=====================================================================================================================
+															cout << "==========================================================================" << endl;
+															cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
+															cout << "==========================================================================" << endl <<endl;
+															cout << " Seleccione una opcion: " << endl; 
+															
+															opcionSubmenu =  fnValidateIntegerSubmenu();
+															
+															system("cls");
+														}while(opcionSubmenu !=0);
+																				
 													
 													break;
 												}
@@ -330,8 +391,9 @@ int main() {
 												}
 											
 									
-										} //end switch catalogoLibros
+										} //end switch catalogo Libros
 									system("cls");	
+							}	//end while catalogo libros
 									break;	
 								}
 								case 3:{ // Catalogo Clientes 

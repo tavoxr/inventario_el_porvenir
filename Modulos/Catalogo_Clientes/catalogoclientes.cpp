@@ -92,7 +92,7 @@ void CatalogoClientes::editarCliente(int id){
 			
 			
 			std::cout << "Nombre: ";
-			std::cin.ignore(0, '\n');
+			std::cin.ignore();
 			getline(std::cin, nombre);
 			
 			std::cout << "NIT: ";
