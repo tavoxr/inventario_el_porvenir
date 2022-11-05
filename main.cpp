@@ -261,6 +261,7 @@ int main() {
 	std::string pass = "";
 	int contador = 0;
 	bool validado = false;
+	Usuario currentUser;
 	
 	do{ 
 		
@@ -279,6 +280,8 @@ int main() {
 			if(catalogoUsuarios.usuarios[i].getNombreUsuario() == user && catalogoUsuarios.usuarios[i].getPassword() == pass){
 				
 				cout << "Credenciales Correctas Bienvenido" << endl;
+				currentUser.setNombreUsuario(catalogoUsuarios.usuarios[i].getNombreUsuario());
+				currentUser.setTipoRol(catalogoUsuarios.usuarios[i].getTipoRol());
 				validado = true;
 				
 			}
