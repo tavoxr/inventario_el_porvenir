@@ -66,7 +66,7 @@ int fnValidateIntegerSubmenuReportes(){
 	
 	while(true){
 				
-		if(cin >> variable && (variable != 0)){	
+		if(cin >> variable && (variable == 0)){	
 			break;
 		}else{
 			cout << "El dato ingresado no es una opcion valida, por favor ingrese un numero valido." << endl;
@@ -89,7 +89,7 @@ void agregarArchivoUsuarios(ofstream &archivo, CatalogoUsuarios catalogoUsuarios
 	std::string dpi;
 	int tipo_rol;
 	
-	archivo.open("Catalogo_Usuarios.txt", ios::out | ios::app);
+	archivo.open(".\\Catalogos\\Catalogo_Usuarios.txt", ios::out | ios::app);
 	
 
 		for(int i =0; i < catalogoUsuarios.usuarios.size(); i++){
@@ -106,16 +106,16 @@ void agregarArchivoUsuarios(ofstream &archivo, CatalogoUsuarios catalogoUsuarios
 	
 }
 
-/*
-void librosArchivo(ofstream &archivo, CatalogoLibros catalogoLibros){
 
-archivo.open("Catalogo_Usuarios.txt", ios::out | ios::app);
+void agregarLibrosArchivo(ofstream &archivo, CatalogoLibros catalogoLibros){
+
+archivo.open(".\\Catalogos\\Catalogo_Libros.txt", ios::out | ios::app);
 	
 
 		for(int i =0; i < catalogoLibros.libros.size(); i++){
 			
-			
-			archivo << catalogoUsuarios.usuarios[i].getNombreUsuario() << " " << catalogoUsuarios.usuarios[i].getCorreo()  << " "   << catalogoUsuarios.usuarios[i].getTelefono() << " " <<catalogoUsuarios.usuarios[i].getPassword() << " " << catalogoUsuarios.usuarios[i].getDPI() << " " << catalogoUsuarios.usuarios[i].getTipoRol() << "\n";
+			archivo <<	std::cout  << "Id: " << catalogoLibros.libros[i].getId() << "  Titulo: " << catalogoLibros.libros[i].getTitulo() << "  Autor: " << catalogoLibros.libros[i].getAutor() << "  Costo: " << catalogoLibros.libros[i].getCosto() << "  Precio de Venta: "  << catalogoLibros.libros[i].getPrecioVenta() << "  Precio de Prestamo: " << catalogoLibros.libros[i].getPrecioPrestamo() << "  Stock:" <<  catalogoLibros.libros[i].getStock() << "  Editorial: " << catalogoLibros.libros[i].getEditorial()   << "  Fecha Copyright: " << catalogoLibros.libros[i].getFechaCopy() << "  Categoria: " << catalogoLibros.libros[i].getCategoria()  << "\n"; 
+		
 			
 			
 		}
@@ -125,9 +125,9 @@ archivo.open("Catalogo_Usuarios.txt", ios::out | ios::app);
 		archivo.close();
 
 }
-*/
-void clientesArchivo(ofstream &archivo, CatalogoClientes catalogoClientes){
-archivo.open("Catalogo_Clientes.txt", ios::out | ios::app);
+
+void agregarClientesArchivo(ofstream &archivo, CatalogoClientes catalogoClientes){
+archivo.open(".\\Catalogos\\Catalogo_Clientes.txt", ios::out | ios::app);
 	
 
 		for(int i =0; i < catalogoClientes.clientes.size(); i++){
@@ -145,8 +145,8 @@ archivo.open("Catalogo_Clientes.txt", ios::out | ios::app);
 
 }
 
-void pedidosArchivo(ofstream &archivo, CatalogoPedidos catalogoPedidos){
-	archivo.open("Catalogo_Pedidos.txt", ios::out | ios::app);
+void agregarPedidosArchivo(ofstream &archivo, CatalogoPedidos catalogoPedidos){
+	archivo.open(".\\Catalogos\\Catalogo_Pedidos.txt", ios::out | ios::app);
 	
 
 		for(int i =0; i < catalogoPedidos.pedidos.size(); i++){
@@ -257,8 +257,46 @@ int main() {
 	catalogoLibros.libros.push_back(libro1);
 	catalogoLibros.libros.push_back(libro2);
 	
+	std::string user = "";
+	std::string pass = "";
+	int contador = 0;
+	bool validado = false;
 	
+	do{ 
+		
+		system("cls");
+		cout << "====================================" << endl;
+		cout << "Login" << endl;
+		cout << "====================================" << endl;
+		contador++;
+		cout << "Ingrese su Nombre de Usuario: " << endl;
+		cin >> user;
+		cout << "Ingrese su Password" << endl;
+		cin >> pass;
+		
+		for(int i=0; i < catalogoUsuarios.usuarios.size(); i++ ){
+			
+			if(catalogoUsuarios.usuarios[i].getNombreUsuario() == user && catalogoUsuarios.usuarios[i].getPassword() == pass){
+				
+				cout << "Credenciales Correctas Bienvenido" << endl;
+				validado = true;
+				
+			}
+			
+			
+			
+		}
+		
+		if(validado == false){
+				cout << "Credenciales incorrectas, por favor intente de nuevo" << endl;
+		}
+		
+		system("pause");
+		
+	}
+	while(!validado);
 	
+	system("cls");
 	int opcion = 0;
 	while(opcion != 4 ){
 	
@@ -309,7 +347,7 @@ int main() {
 								case 1:{
 										int opcionCatalogoUsuarios = 0;
 										
-										while(opcionCatalogoUsuarios !=5 ){
+										while(opcionCatalogoUsuarios !=6 ){
 										
 										//Catalogo Usuarios						
 										cout << "========================================" << endl;
@@ -319,7 +357,8 @@ int main() {
 										cout << "2. Agregar Usuario " << endl;
 										cout << "3. Editar Usuario" << endl;
 										cout << "4. Eliminar Usuario" << endl;
-										cout << "5. Salir" << endl;
+										cout << "5. Generar Archivo de Usuarios" << endl;
+										cout << "6. Salir" << endl;
 										cout << "========================================" << endl << endl;
 										
 										cout << "Selecciona una opcion: " << endl;	
@@ -441,7 +480,35 @@ int main() {
 												
 													break;
 												}
+												
 												case 5:{
+														int opcionSubmenu = 2;
+														
+														
+														do{
+														
+															agregarArchivoUsuarios(Archivo, catalogoUsuarios);
+															cout << "==================================" << endl;
+															cout << "	Archivo Generado Exitosamente" << endl <<endl;
+															cout << "==================================" << endl;
+															
+																//====================================================================================================================	
+																//								SUBMENU
+																//=====================================================================================================================
+																cout << "==========================================================================" << endl;
+																cout << "| 0 - Regresar al menu catalogo       |" << endl;
+																cout << "==========================================================================" << endl <<endl;
+																cout << " Seleccione una opcion: " << endl; 
+																
+																opcionSubmenu =  fnValidateIntegerSubmenuReportes();
+																
+																system("cls");
+														}while(opcionSubmenu !=0);
+														
+														
+													break;
+												}
+												case 6:{
 														cout << "dd" << endl;
 													break;
 												}
@@ -456,7 +523,7 @@ int main() {
 								
 										int opcionCatalogoLibros = 0;
 										
-										while(opcionCatalogoLibros !=5 ){
+										while(opcionCatalogoLibros !=6 ){
 								
 									
 										//Catalogo Usuarios						
@@ -467,7 +534,8 @@ int main() {
 										cout << "2. Agregar Libro " << endl;
 										cout << "3. Editar Libro" << endl;
 										cout << "4. Eliminar Libro" << endl;
-										cout << "5. Salir" << endl;
+										cout << "5. Generar Catalogo en formato .txt" << endl;
+										cout << "6. Salir" << endl;
 										cout << "========================================" << endl << endl;
 										
 										cout << "Selecciona una opcion: " << endl;	
@@ -589,6 +657,41 @@ int main() {
 													break;
 												}
 												case 5:{
+															int opcionSubmenu = 2;
+														do{
+															
+																agregarLibrosArchivo(librosArchivo, catalogoLibros);
+																cout << "==========================================" << endl;
+																cout << "  Archivo Generado Exitosamente "      << endl;
+																cout << "==========================================" << endl <<endl;
+																
+																
+																
+															
+															//====================================================================================================================	
+																//								SUBMENU
+																//=====================================================================================================================
+																cout << "==========================================================================" << endl;
+																cout << "| 0 - Regresar al menu catalago        |" << endl;
+																cout << "==========================================================================" << endl <<endl;
+																cout << " Seleccione una opcion: " << endl; 
+																
+																opcionSubmenu =  fnValidateIntegerSubmenuReportes();
+																
+																system("cls");
+															}while(opcionSubmenu !=0);
+													
+													
+													
+													
+													
+													
+													
+													
+													break;
+												}
+												
+												case 6:{
 													break;
 												}
 											
@@ -603,7 +706,7 @@ int main() {
 										int opcionCatalogoClientes = 0;
 										
 										
-										while(opcionCatalogoClientes !=5 ){
+										while(opcionCatalogoClientes !=6 ){
 										
 																
 										cout << "========================================" << endl;
@@ -613,7 +716,8 @@ int main() {
 										cout << "2. Agregar Cliente " << endl;
 										cout << "3. Editar Cliente" << endl;
 										cout << "4. Eliminar Cliente" << endl;
-										cout << "5. Salir" << endl;
+										cout << "5. Generar Catalogo en formato .txt" <<endl;
+										cout << "6. Salir" << endl;
 										cout << "========================================" << endl << endl;
 										
 										cout << "Selecciona una opcion: " << endl;	
@@ -722,7 +826,7 @@ int main() {
 															//								SUBMENU
 															//=====================================================================================================================
 															cout << "==========================================================================" << endl;
-															cout << "| 0 - Regresar al menu catalogo       |        1 - Editar otro Cliente   |" << endl;
+															cout << "| 0 - Regresar al menu catalogo       |        1 - Eliminar otro Cliente   |" << endl;
 															cout << "==========================================================================" << endl <<endl;
 															cout << " Seleccione una opcion: " << endl; 
 															
@@ -735,6 +839,48 @@ int main() {
 													break;
 												}
 												case 5:{
+														int opcionSubmenu = 2;
+														
+														
+														do{
+															
+															agregarClientesArchivo(clientesArchivo , catalogoClientes);
+															
+															cout << "==========================================" << endl;
+															cout << "  Archivo Generado con Exito "      << endl;
+															cout << "==========================================" << endl <<endl;
+															
+															
+															//====================================================================================================================	
+																//								SUBMENU
+																//=====================================================================================================================
+																cout << "==========================================================================" << endl;
+																cout << "| 0 - Regresar al menu catalogo       |" << endl;
+																cout << "==========================================================================" << endl <<endl;
+																cout << " Seleccione una opcion: " << endl; 
+																
+																opcionSubmenu =  fnValidateIntegerSubmenuReportes();
+																
+																system("cls");
+														}while(opcionSubmenu !=0);
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													break;
+												}
+												case 6:{
 													break;
 												}
 										} //end switch catalogoClientes
@@ -1009,8 +1155,9 @@ int main() {
 			
 			
 					agregarArchivoUsuarios(Archivo, catalogoUsuarios);
-				//	pedidosArchivo(pedidosArchivo,  catalogoPedidos);
-				//	clientesArchivo(clientesArchivo , catalogoClientes);
+					agregarPedidosArchivo(pedidosArchivo,  catalogoPedidos);
+					agregarClientesArchivo(clientesArchivo , catalogoClientes);
+					agregarLibrosArchivo(librosArchivo, catalogoLibros);
 					system("cls");
 					cout << "salir" << endl;
 				break;

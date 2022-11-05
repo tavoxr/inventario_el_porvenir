@@ -1,0 +1,2 @@
+0x4ae268Id: 1  Titulo: Lord of the rings  Autor: Tolkien  Costo: 48.5  Precio de Venta: 90.5  Precio de Prestamo: 2.99  Stock:20  Editorial: Santillana  Fecha Copyright: 1992  Categoria: Fantasia
+0x4ae268Id: 2  Titulo: Hamlet  Autor: Shakespeare  Costo: 28  Precio de Venta: 50.5  Precio de Prestamo: 1.99  Stock:40  Editorial: Santillana  Fecha Copyright: 1940  Categoria: Drama
