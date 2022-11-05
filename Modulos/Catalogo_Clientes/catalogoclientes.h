@@ -31,6 +31,7 @@ class CatalogoClientes
 			
 			 void agregarCliente();
 			 void listarClientes();
+			 Cliente obtenerCliente(int id);  
 			 void editarCliente(int id);
 			 void eliminarCliente(int id);
 		

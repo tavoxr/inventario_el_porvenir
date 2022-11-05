@@ -10,6 +10,7 @@
 #include "Modulos/Catalogo_Usuarios/catalogousuarios.h"
 #include "Modulos/Catalogo_Clientes/catalogoclientes.h"
 #include "Modulos/Catalogo_Libros/catalogolibros.h"
+#include "Modulos/Catalogo_Pedidos/catalogopedidos.h"
 
 #include <fstream>
 using namespace std;
@@ -22,7 +23,7 @@ int fnValidateInteger(){
 	
 	while(true){
 				
-		if(cin >> variable && (variable > 0 && variable < 8)){	
+		if(cin >> variable && (variable > 0 && variable < 10)){	
 			break;
 		}else{
 			cout << "El dato ingresado no es una opcion valida, por favor ingrese un numero valido." << endl;
@@ -57,7 +58,31 @@ int fnValidateIntegerSubmenu(){
 }
 
 
-void agregar(ofstream &archivo){
+//==============================================================
+//Funcion para validar si el dato ingresado es de tipo integer para submenu de reportes
+//==============================================================
+int fnValidateIntegerSubmenuReportes(){
+	int variable;
+	
+	while(true){
+				
+		if(cin >> variable && (variable != 0)){	
+			break;
+		}else{
+			cout << "El dato ingresado no es una opcion valida, por favor ingrese un numero valido." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+		
+		}
+	}	
+	return variable;
+
+}
+
+
+
+
+void agregarArchivoUsuarios(ofstream &archivo, CatalogoUsuarios catalogoUsuarios){
 	std::string nombre_usuario;
 	std::string telefono; 
 	std::string password;
@@ -66,35 +91,53 @@ void agregar(ofstream &archivo){
 	
 	archivo.open("Catalogo_Usuarios.txt", ios::out | ios::app);
 	
-	//Obtener datos de Usuario-------------------------------------------------
-		std::cout << "===============================" << std::endl;
-		std::cout << "Agregar Nuevo Usuario" << std::endl;
-		std::cout << "===============================" << std::endl << std::endl;
-		
+
+		for(int i =0; i < catalogoUsuarios.usuarios.size(); i++){
 			
-		std::cout << "Nombre Usuario: ";
-		std::cin.ignore(0, '\n');
-		getline(std::cin, nombre_usuario);
+			
+			archivo << catalogoUsuarios.usuarios[i].getNombreUsuario() << " " << catalogoUsuarios.usuarios[i].getCorreo()  << " "   << catalogoUsuarios.usuarios[i].getTelefono() << " " <<catalogoUsuarios.usuarios[i].getPassword() << " " << catalogoUsuarios.usuarios[i].getDPI() << " " << catalogoUsuarios.usuarios[i].getTipoRol() << "\n";
+			
+			
+		}
+	
 		
-		std::cout << "Telefono: ";
-		std::cin.ignore(0, '\n');
-		getline(std::cin,telefono);
-		
-		std::cout << "Password: ";
-		std::cin.ignore(0, '\n');
-		getline(std::cin,password);
-		
-		std::cout << "DPI: ";
-		std::cin.ignore(0, '\n');
-		getline(std::cin,dpi);
-		
-		std::cout << "Tipo Rol: ";
-		std::cin >> tipo_rol;
-		
-		archivo << nombre_usuario << "-" << telefono << "-" <<password << "-" << dpi << "-" << tipo_rol << "\n";
+		//archivo << nombre_usuario << "-" << telefono << "-" <<password << "-" << dpi << "-" << tipo_rol << "\n";
 		archivo.close();
 	
+}
+
+void leerUsuarios(ifstream &lectura, CatalogoUsuarios catalogoUsuarios){
 	
+	std::string nombre_usuario;
+	std::string correo;
+	std::string telefono; 
+	std::string password;
+	std::string dpi;
+	int tipo_rol;
+	
+	lectura.open("Catalogo_Usuarios.txt", ios::in);
+	
+	int contador= 0;
+	
+	
+	
+	while(!lectura.eof()){
+		lectura >> nombre_usuario;
+		lectura >> correo;
+		lectura >>telefono;
+		lectura >> password;
+		lectura >> dpi;
+		lectura  >> tipo_rol;
+		
+		
+		
+		Usuario usuario= Usuario(nombre_usuario,correo,telefono,password,dpi,tipo_rol);
+		catalogoUsuarios.usuarios.push_back(usuario);
+		
+	
+	}
+	
+	lectura.close();
 	
 	
 	
@@ -103,17 +146,42 @@ void agregar(ofstream &archivo){
 
 int main() {
 	ofstream Archivo;
+	ifstream Lectura;
+	
+	
+	
+	//vector
+	//vector<Pedido> pedidos;
 	
 	//declaracion de variables
 	CatalogoUsuarios catalogoUsuarios;
 	CatalogoClientes catalogoClientes;
 	CatalogoLibros catalogoLibros;
+	CatalogoPedidos catalogoPedidos;
 	
+	leerUsuarios(Lectura,catalogoUsuarios);
+	//agregarArchivoUsuarios(Archivo, catalogoUsuarios);
+	
+	//Datos Provisionales
+	Cliente cliente1 = Cliente("Mario","4563456-7",34,"23455432");
+	Cliente cliente2 = Cliente("Rocxana","453456-4",27,"54348934");
+	catalogoClientes.clientes.push_back(cliente1);
+	catalogoClientes.clientes.push_back(cliente2);
+	
+	Usuario usuario1 = Usuario("Roger","roger@email.com","44534534","123","3536364362",1);
+	Usuario usuario2 = Usuario("Carlos","carlos@email.com","55534534","1098","4326364362",0);
+	catalogoUsuarios.usuarios.push_back(usuario1);
+	catalogoUsuarios.usuarios.push_back(usuario2);
+	
+	Libro libro1 = Libro("Lord of the rings","Tolkien",48.5,90.5,2.99,20,"Santillana","1992","Fantasia");
+	Libro libro2 = Libro("Hamlet","Shakespeare",28,50.5,1.99,40,"Santillana","1940","Drama");
+	catalogoLibros.libros.push_back(libro1);
+	catalogoLibros.libros.push_back(libro2);
 	
 	
 	
 	int opcion = 0;
-	while(opcion != 5 ){
+	while(opcion != 4 ){
 	
 	//Menu Opciones
 	cout << "Bienvenido al programa de inventario de la biblioteca \"El Porvenir\" " << endl << endl;
@@ -122,10 +190,9 @@ int main() {
 	cout << "      Menu opciones" << endl;
 	cout << "========================================" << endl;
 	cout << "1. Configuraciones" << endl;
-	cout << "2. Ingreso de Inventario" << endl;
-	cout << "3. Despacho de Inventario" << endl;
-	cout << "4. Reportes" << endl;
-	cout << "5. Salir" << endl;
+	cout << "2. Despacho de Inventario" << endl;
+	cout << "3. Reportes" << endl;
+	cout << "4. Salir" << endl;
 	cout << "========================================" << endl << endl;
 
 	cout << "Selecciona una opcion: " << endl; 
@@ -134,14 +201,14 @@ int main() {
 	opcion = fnValidateInteger();
 	system("cls");
 	
-	switch(opcion){
+	switch(opcion){  // SWITCH CONFIGURACIONES
 		
 			case 1: {
 				
 			
 					int opcionConfig=0;
 					
-					while(opcionConfig !=5 ){
+					while(opcionConfig !=4 ){
 						
 						
 						//Menu Configuraciones						
@@ -151,8 +218,7 @@ int main() {
 						cout << "1. Catalogo Usuarios" << endl;
 						cout << "2. Catalogo Libros" << endl;
 						cout << "3. Catalogo Clientes" << endl;
-						cout << "4. Configurar Iva %" << endl;
-						cout << "5. Salir" << endl;
+						cout << "4. Salir" << endl;
 						cout << "========================================" << endl << endl;
 						
 						cout << "Selecciona una opcion: " << endl;	
@@ -597,20 +663,8 @@ int main() {
 								}
 									break;
 								}
-								case 4:{
-									
-										float iva  = 0.12;
-										//Configuracion Iva						
-										cout << "========================================" << endl;
-										cout << "      Configuracion de IVA %" << endl;
-										cout << "========================================" << endl;
-									
-															
-									system("cls");
-									break;
-								}
-								 	
-								case 5: 
+														 	
+								case 4: 
 									system("cls");
 									break;	
 							
@@ -624,26 +678,269 @@ int main() {
 			
 				break;
 			}
-			case 2:
-				cout << "Ingreso inventario" << endl;
-				break;
-			case 3: 
-				cout << "Despacho inventario" << endl;
-				break;
+		
+			case 2:{ // ============================================== DESPACHO INVENTARIO ================================================
+					
+						
+						
+					int opcionSubmenu = 2;
+					int opcionRealizarPedido= 0;
+														
+					  do{
+						
+						
+						
+						
+						
+						catalogoPedidos.agregarPedido(catalogoLibros,catalogoClientes);
+						
+						
+						//====================================================================================================================	
+						//								SUBMENU
+						//=====================================================================================================================
+						cout << "==========================================================================" << endl;
+						cout << "| 0 - Regresar al menu catalogo       |        1 - Editar otro Cliente   |" << endl;
+						cout << "==========================================================================" << endl <<endl;
+						cout << " Seleccione una opcion: " << endl; 
+						
+						opcionSubmenu =  fnValidateIntegerSubmenu();
+						
+						system("cls");
+						}while(opcionSubmenu !=0);
+						
 				
-			case 4:
-					cout << "Reportes" << endl;
-				break;	
-			case 5: 
+				
+				
+				break;
+				}
+			case 3:{
+			
+			
+					int opcionReportes = 0;
+					while(opcionReportes !=6 ){
+										
+																
+																
+										cout << "========================================" << endl;
+										cout << "      Reportes"      << endl;
+										cout << "========================================" << endl;
+										cout << "1. Reporte libros por titulo y autor" << endl;
+										cout << "2. Reporte completo inventario " << endl;
+										cout << "3. Reporte inventario por precio menor a mayor" << endl;
+										cout << "4. Reporte de busqueda de libro especifico" << endl;
+										cout << "5. Reporte lista de pedidos" << endl;
+										cout << "6. Salir" << endl;
+										cout << "========================================" << endl << endl;
+										
+										cout << "Selecciona una opcion: " << endl;	
+										opcionReportes =  fnValidateInteger();
+				
+											switch(opcionReportes){
+											
+												case 1:{
+													
+														int opcionSubmenu = 2;
+														
+														
+														do{
+														cout << "========================================" << endl;
+														cout << "      Reporte libros por titulo y autor "      << endl;
+														cout << "========================================" << endl <<endl;
+														
+														catalogoLibros.listarTituloYAutor();	
+														
+														
+														//====================================================================================================================	
+															//								SUBMENU
+															//=====================================================================================================================
+															cout << "==========================================================================" << endl;
+															cout << "| 0 - Regresar al menu reportes        |" << endl;
+															cout << "==========================================================================" << endl <<endl;
+															cout << " Seleccione una opcion: " << endl; 
+															
+															opcionSubmenu =  fnValidateIntegerSubmenuReportes();
+															
+															system("cls");
+														}while(opcionSubmenu !=0);
+															
+													
+													break;
+												}
+												case 2:{
+													
+														int opcionSubmenu = 2;
+														
+														
+														do{
+														cout << "==========================================" << endl;
+														cout << "  Reporte Inventario de libros completo "      << endl;
+														cout << "==========================================" << endl <<endl;
+														
+														catalogoLibros.listarLibros();	
+														
+														
+														//====================================================================================================================	
+															//								SUBMENU
+															//=====================================================================================================================
+															cout << "==========================================================================" << endl;
+															cout << "| 0 - Regresar al menu reportes        |" << endl;
+															cout << "==========================================================================" << endl <<endl;
+															cout << " Seleccione una opcion: " << endl; 
+															
+															opcionSubmenu =  fnValidateIntegerSubmenuReportes();
+															
+															system("cls");
+														}while(opcionSubmenu !=0);
+													
+												
+													
+													break;
+												}
+												case 3:{
+													
+														int opcionSubmenu = 2;
+														
+														
+														do{
+														cout << "==========================================" << endl;
+														cout << "  Reporte Inventario de libros completo "      << endl;
+														cout << "==========================================" << endl <<endl;
+														
+														catalogoLibros.listarLibros();	
+														
+														
+														//====================================================================================================================	
+															//								SUBMENU
+															//=====================================================================================================================
+															cout << "==========================================================================" << endl;
+															cout << "| 0 - Regresar al menu reportes        |" << endl;
+															cout << "==========================================================================" << endl <<endl;
+															cout << " Seleccione una opcion: " << endl; 
+															
+															opcionSubmenu =  fnValidateIntegerSubmenuReportes();
+															
+															system("cls");
+														}while(opcionSubmenu !=0);
+													
+													
+													
+													
+													
+													
+													break;
+												}
+												case 4:{
+														int opcionSubmenu = 2;
+														int idLibro =0;
+														Libro verLibro;
+														
+														do{
+														cout << "========================================================" << endl;
+														cout << "  Reporte Inventario Busqueda de un libro en especifico "      << endl;
+														cout << "========================================================" << endl <<endl;
+														
+														catalogoLibros.listarLibros();
+														
+														cout << endl << endl;
+														cout << "Por favor seleccione el id del libro que desea el reporte: " << endl;
+														idLibro = fnValidateInteger();
+														
+														verLibro =  catalogoLibros.obtenerLibro(idLibro);
+														
+														
+														std::cout << " Id: " << verLibro.getId() << std::endl;
+														std::cout << " Titulo: " << verLibro.getTitulo() << std::endl;
+														std::cout << " Autor: " << verLibro.getAutor() << std::endl;
+														std::cout << " Costo: " << verLibro.getCosto()  << std::endl;
+														std::cout << " Precio de Venta: " << verLibro.getPrecioVenta() << std::endl;
+														std::cout << " Precio de Prestamo: " << verLibro.getPrecioPrestamo() << std::endl;
+														std::cout << " Stock: " << verLibro.getStock() << std::endl;
+														std::cout << " Editorial: " << verLibro.getEditorial() << std::endl;
+														std::cout << " FechaCopyright: " << verLibro.getFechaCopy() << std::endl;
+														std::cout << " Categoria: " << verLibro.getCategoria() << std::endl << std::endl;
+														
+														
+														//====================================================================================================================	
+															//								SUBMENU
+															//=====================================================================================================================
+															cout << "==========================================================================" << endl;
+															cout << "| 0 - Regresar al menu reportes        |" << endl;
+															cout << "==========================================================================" << endl <<endl;
+															cout << " Seleccione una opcion: " << endl; 
+															
+															opcionSubmenu =  fnValidateIntegerSubmenuReportes();
+															
+															system("cls");
+														}while(opcionSubmenu !=0);
+													
+													
+													
+													
+													break;
+												}
+												case 5:{
+													int opcionSubmenu = 2;
+														
+														
+														do{
+														cout << "==========================================" << endl;
+														cout << "  Reporte listado de pedidos "      << endl;
+														cout << "==========================================" << endl <<endl;
+														
+														catalogoPedidos.listarPedidos();
+														
+														
+														//====================================================================================================================	
+															//								SUBMENU
+															//=====================================================================================================================
+															cout << "==========================================================================" << endl;
+															cout << "| 0 - Regresar al menu reportes        |" << endl;
+															cout << "==========================================================================" << endl <<endl;
+															cout << " Seleccione una opcion: " << endl; 
+															
+															opcionSubmenu =  fnValidateIntegerSubmenuReportes();
+															
+															system("cls");
+														}while(opcionSubmenu !=0);
+													
+											
+													
+													
+													break;
+												}
+												case 6:{
+													break;
+												}
+												
+											
+											
+											
+											
+											
+											}
+				
+				
+				
+						}
+				
+				break;
+			}
+			case 4: {
+			
+			
+			
+					agregarArchivoUsuarios(Archivo, catalogoUsuarios);
+			
+					system("cls");
 					cout << "salir" << endl;
 				break;
 				
+			}
 		
 		
 		
 		
-		
-	}
+	} // END WHILE CONFIGURACIONES
 	
 	/*
 	if(opcion == 2){

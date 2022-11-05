@@ -3,14 +3,29 @@
 
 #include <string>
 
+
+#include "../../Modulos/Catalogo_Clientes/catalogoclientes.h"
+#include "../../Modulos/Catalogo_Libros/catalogolibros.h"
+
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+
+
+
+
 class Pedido
 {
 	private:
 		
 		static int Id;
 		int IdPedido;
+		int	Id_Libro;
 		int Id_Cliente;
 		std::string Fecha;
+		int TipoOrden;
+		int Cantidad;
 		float SubTotal;
 		float Iva;
 		float PrecioTotal;
@@ -22,13 +37,24 @@ class Pedido
 		Pedido();
 		
 		//Custom Constructor
-		Pedido( int id_cliente,float subTotal, float iva, float precioTotal);
+		Pedido( int id_libro, int id_cliente, int tipo_orden, int cantidad);
 		
 		//Id
 		int getId();
 		
+		//Id_Libro
+		int getIdLibro();
+		
 		//Id_Cliente
 		int getIdCliente();
+		
+		//TipoOrden
+		void setTipoOrden(int tipo_orden);
+		int  getTipoOrden();
+		
+		//Cantidad
+		void setCantidad(int cantidad);
+		int getCantidad();
 			
 		//SubTotal
 		void setSubTotal(float subtotal);
@@ -41,8 +67,17 @@ class Pedido
 		//PrecioTotal
 		void setPrecioTotal(float precioTotal);
 		float getPrecioTotal();
+		
+		
+		//--------Metodos ------------------
+		
+		//Realizar Pedido
+		Pedido realizarPedido(CatalogoLibros catalogo_libros, CatalogoClientes catalogo_clientes);
+		
+		//Editar Pedido
+		Pedido editarPedido();
 
-
+		void configurarPrecios();
 };
 
 

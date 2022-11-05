@@ -80,6 +80,68 @@ void CatalogoLibros::listarLibros(){
 
 
 
+void CatalogoLibros::listarTituloYAutor(){
+	
+		for(int i=0; i < libros.size(); i++){
+		
+		
+		std::cout << "----------------------------------------------------------------------------------------" << std::endl;
+		std::cout << "| Id: " << libros[i].getId() << "  Titulo: " << libros[i].getTitulo() << "  Autor: "  << libros[i].getAutor()  << std::endl; 
+		std::cout << "----------------------------------------------------------------------------------------" << std::endl;		
+	}
+	
+}
+
+
+
+void CatalogoLibros::listarPorPrecioVenta(){
+	
+		for(int i=0; i < libros.size(); i++){
+		
+		
+		std::cout << "----------------------------------------------------------------------------------------" << std::endl;
+		std::cout << "| Id: " << libros[i].getId() << "  Titulo: " << libros[i].getTitulo() << "  Autor: "  << libros[i].getAutor()  << std::endl; 
+		std::cout << "----------------------------------------------------------------------------------------" << std::endl;		
+	}
+	
+}
+
+
+void CatalogoLibros::listarLibrosResumidos(){
+			std::cout << "=========================================================================" << std::endl;
+			std::cout << "  Listado de Libros en Inventario  " << std::endl;
+			std::cout << "=========================================================================" << std::endl << std::endl;
+	
+	for(int i=0; i < libros.size(); i++){
+		
+		
+		std::cout << "----------------------------------------------------------------------------------------" << std::endl;
+		std::cout << "| Id: " << libros[i].getId() << "  Titulo: " << libros[i].getTitulo() << "  Precio de Venta: "  << libros[i].getPrecioVenta() << "  Precio de Prestamo: " << libros[i].getPrecioPrestamo() << "  Stock:" <<  libros[i].getStock()  << std::endl; 
+		std::cout << "----------------------------------------------------------------------------------------" << std::endl;		
+	}
+
+}
+
+
+Libro CatalogoLibros::obtenerLibro(int id){
+		
+		Libro libro;
+	
+	for(int i=0; i < libros.size(); i++){
+		
+			if(libros[i].getId() == id ){
+			
+					libro = libros[i];	
+			}		
+	}
+
+	return libro;
+}
+
+
+
+
+
 
 void CatalogoLibros::editarLibro(int id){
 	
@@ -220,3 +282,15 @@ void CatalogoLibros::eliminarLibro(int id){
 
 }
 
+
+
+void CatalogoLibros::eliminarLibrosSinStock(){
+
+	for(int i=0; i < libros.size(); i++){
+		
+		if(libros[i].getStock() <= 0 ){
+			libros.erase(libros.begin() + i);
+		}
+}
+
+}

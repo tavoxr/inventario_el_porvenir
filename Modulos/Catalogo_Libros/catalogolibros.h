@@ -24,12 +24,16 @@ class CatalogoLibros
 			
 		//------------------------Methods--------------------
 			
-			
+			 
 			 void agregarLibro();
 			 void listarLibros();
+			 void listarLibrosResumidos();
+			 Libro obtenerLibro(int id);	
 			 void editarLibro(int id);
 			 void eliminarLibro(int id);
-		
+			 void listarTituloYAutor();
+			 void listarPorPrecioVenta();
+			 void eliminarLibrosSinStock();			
 	
 };
 

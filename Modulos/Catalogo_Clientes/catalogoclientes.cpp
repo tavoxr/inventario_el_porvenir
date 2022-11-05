@@ -69,6 +69,25 @@ void CatalogoClientes::listarClientes(){
 
 
 
+Cliente CatalogoClientes::obtenerCliente(int id){
+		
+		Cliente cliente;
+	
+	for(int i=0; i < clientes.size(); i++){
+		
+			if(clientes[i].getId() == id ){
+			
+					cliente = clientes[i];	
+			}		
+	}
+
+	return cliente;
+}
+
+
+
+
+
 
 void CatalogoClientes::editarCliente(int id){
 	
