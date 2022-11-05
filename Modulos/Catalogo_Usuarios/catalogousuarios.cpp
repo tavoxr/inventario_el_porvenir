@@ -149,6 +149,29 @@ void CatalogoUsuarios::editarUsuarios(int id){
 
 void CatalogoUsuarios::eliminarUsuarios(int id){
 
+		for(int i=0; i < usuarios.size(); i++){
+			
+			if(usuarios[i].getId() == id){
+				
+				std::cout << "=========================================================================" << std::endl;
+				std::cout << "  Usuario Eliminado Exitosamente" << std::endl;
+				std::cout << "=========================================================================" << std::endl << std::endl;
+				std::cout << " Id: " << usuarios[i].getId() << std::endl;
+				std::cout << " Nombre Usuario: " << usuarios[i].getNombreUsuario() << std::endl;
+				std::cout << " Correo: " << usuarios[i].getCorreo() << std::endl;
+				std::cout << " Telefono: " << usuarios[i].getTelefono()  << std::endl;
+				//std::cout << " Password: " << usuarios[i].getPassword() << std::endl;
+				std::cout << " DPI: " << usuarios[i].getDPI() << std::endl;
+				std::cout << " Rol: " << usuarios[i].getTipoRol() << std::endl;
+				std::cout << "=========================================================================" << std::endl;
+				std::cout << std::endl << std::endl << std::endl;
+				
+				
+				usuarios.erase(usuarios.begin() + i);
+				
+				break;
+			}
+		}
 
 }
 

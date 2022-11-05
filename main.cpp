@@ -266,10 +266,34 @@ int main() {
 													break;
 												}
 												case 4:{
+														int opcionSubmenu = 2;
+														int opcionEliminarUsuario= 0;
+														
+														do{
+														
+														
+															catalogoUsuarios.listarUsuarios();
+															
+															cout << "Selecciona el Id del usuario a eliminar: " << endl;
+															opcionEliminarUsuario =  fnValidateInteger();
+															
+															catalogoUsuarios.eliminarUsuarios(opcionEliminarUsuario);
+														
+															
+															//====================================================================================================================	
+															//								SUBMENU
+															//=====================================================================================================================
+															cout << "===========================================================================" << endl;
+															cout << "| 0 - Regresar al menu catalogo       |        1 - Eliminar otro Usuario  |" << endl;
+															cout << "===========================================================================" << endl <<endl;
+															cout << " Seleccione una opcion: " << endl; 
+															
+															opcionSubmenu =  fnValidateIntegerSubmenu();
+															
+															system("cls");
+														}while(opcionSubmenu !=0);
 													
-													
-													
-														cout << "dd" << endl;
+												
 													break;
 												}
 												case 5:{
