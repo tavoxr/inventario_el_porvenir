@@ -52,7 +52,7 @@ Cliente::Cliente(std::string nombre, std::string nit, int edad, std::string tele
 	}
 
 
-//Dpi
+//NIT
 	void Cliente::setNIT(std::string nit){
 		NIT =  nit;
 	}
@@ -82,4 +82,55 @@ Cliente::Cliente(std::string nombre, std::string nit, int edad, std::string tele
 	}
 	
 	
+
+
+//=============================================================================================================================================================
+//															METHODS
+//=============================================================================================================================================================
+
+
+Cliente Cliente::crearCliente(){
+	
+	
+		//Declaracion variables
+			std::string nombre, nit, telefono;
+			int edad;
+	
+		//Obtener datos de Cliente-------------------------------------------------
+		std::cout << "===============================" << std::endl;
+		std::cout << "Agregar Nuevo Cliente" << std::endl;
+		std::cout << "===============================" << std::endl << std::endl;
+		
+		std::cin.ignore(0, '\n');
+		std::cout << "Nombre: ";
+		std::cin.ignore();
+		getline(std::cin, nombre);
+		
+		std::cout << "NIT: ";
+		std::cin.ignore(0, '\n');
+		getline(std::cin,nit);
+		
+		std::cout << "Edad: ";
+		std::cin.ignore(0, '\n');
+		std::cin >> edad;
+	
+	
+		std::cout << "Telefono: ";
+		std::cin.ignore();
+		getline(std::cin,telefono);
+		
+		
+	
+	
+		system("cls"); //Limpiar Pantalla
+		
+		Cliente clienteNuevo = Cliente(nombre,nit,edad,telefono); // Cliente Nuevo
+		
+		return  clienteNuevo;
+	
+}
+
+
+
+
 

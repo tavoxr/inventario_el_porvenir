@@ -20,7 +20,7 @@ class Usuario
 		Usuario();
 		
 		//Custom Constructor
-		Usuario(std::string nombre_usuario,std::string telefono, std::string password,std::string dpi, int tipo_rol );
+		Usuario(std::string nombre_usuario,std::string correo, std::string telefono, std::string password,std::string dpi, int tipo_rol );
 		
 		
 		
@@ -54,6 +54,12 @@ class Usuario
 			void setTipoRol(int);
 			int getTipoRol();
 			
+			
+			
+			//--------Metodos ------------------
+		
+			//Agregar Libro
+			Usuario crearUsuario();
 		
 			
 };
