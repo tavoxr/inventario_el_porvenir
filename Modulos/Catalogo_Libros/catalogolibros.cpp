@@ -162,7 +162,7 @@ void CatalogoLibros::editarLibro(int id){
 			system("cls");
 			
 			std::cout << "=========================================================================" << std::endl;
-			std::cout << "  Cliente Editado Exitosamente" << std::endl;
+			std::cout << "  Libro Editado Exitosamente" << std::endl;
 			std::cout << "=========================================================================" << std::endl << std::endl;
 			std::cout << " Id: " << libros[i].getId() << std::endl;
 			std::cout << " Titulo: " << libros[i].getTitulo() << std::endl;
@@ -189,7 +189,34 @@ void CatalogoLibros::editarLibro(int id){
 
 void CatalogoLibros::eliminarLibro(int id){
 
+	for(int i=0; i < libros.size(); i++){
+	
+		if(libros[i].getId() == id){
+			
+			std::cout << "=========================================================================" << std::endl;
+			std::cout << "  Libro Eliminado Exitosamente" << std::endl;
+			std::cout << "=========================================================================" << std::endl << std::endl;
+			std::cout << " Id: " << libros[i].getId() << std::endl;
+			std::cout << " Titulo: " << libros[i].getTitulo() << std::endl;
+			std::cout << " Autor: " << libros[i].getAutor() << std::endl;
+			std::cout << " Costo: " << libros[i].getCosto()  << std::endl;
+			std::cout << " Precio de Venta: " << libros[i].getPrecioVenta() << std::endl;
+			std::cout << " Precio de Prestamo: " << libros[i].getPrecioPrestamo() << std::endl;
+			std::cout << " Stock: " << libros[i].getStock() << std::endl;
+			std::cout << " Editorial: " << libros[i].getEditorial() << std::endl;
+			std::cout << " FechaCopyright: " << libros[i].getFechaCopy() << std::endl;
+			std::cout << " Categoria: " << libros[i].getCategoria() << std::endl;
+			std::cout << "=========================================================================" << std::endl;
+			std::cout << std::endl << std::endl << std::endl;
+			
 
+			libros.erase(libros.begin() + i);
+			
+			break;
+		}
+	
+	
+	}
 
 }
 

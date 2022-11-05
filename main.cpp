@@ -193,9 +193,9 @@ int main() {
 														//====================================================================================================================	
 														//								SUBMENU
 														//=====================================================================================================================
-														cout << "==========================================================================" << endl;
-														cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
-														cout << "==========================================================================" << endl <<endl;
+														cout << "===============================================================================" << endl;
+														cout << "| 0 - Regresar al menu catalogo       |        1 - Volver a listar Usuarios  |" << endl;
+														cout << "===============================================================================" << endl <<endl <<endl;
 														cout << " Seleccione una opcion: " << endl; 
 														
 														opcionSubmenu =  fnValidateIntegerSubmenu();
@@ -218,7 +218,7 @@ int main() {
 														//								SUBMENU
 														//=====================================================================================================================
 														cout << "==========================================================================" << endl;
-														cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
+														cout << "| 0 - Regresar al menu catalogo       |        1 - Agregar otro Usuario  |" << endl;
 														cout << "==========================================================================" << endl <<endl;
 														cout << " Seleccione una opcion: " << endl; 
 														
@@ -252,7 +252,7 @@ int main() {
 															//								SUBMENU
 															//=====================================================================================================================
 															cout << "==========================================================================" << endl;
-															cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
+															cout << "| 0 - Regresar al menu catalogo       |        1 - Editar otro Libro  |" << endl;
 															cout << "==========================================================================" << endl <<endl;
 															cout << " Seleccione una opcion: " << endl; 
 															
@@ -266,6 +266,9 @@ int main() {
 													break;
 												}
 												case 4:{
+													
+													
+													
 														cout << "dd" << endl;
 													break;
 												}
@@ -313,9 +316,9 @@ int main() {
 														//====================================================================================================================	
 														//								SUBMENU
 														//=====================================================================================================================
-														cout << "==========================================================================" << endl;
-														cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
-														cout << "==========================================================================" << endl <<endl;
+														cout << "============================================================================" << endl;
+														cout << "| 0 - Regresar al menu catalogo       |        1 - Volver a listar libros  |" << endl;
+														cout << "============================================================================" << endl <<endl<<endl;
 														cout << " Seleccione una opcion: " << endl; 
 														
 														opcionSubmenu =  fnValidateIntegerSubmenu();
@@ -337,9 +340,9 @@ int main() {
 														//====================================================================================================================	
 														//								SUBMENU
 														//=====================================================================================================================
-														cout << "==========================================================================" << endl;
-														cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
-														cout << "==========================================================================" << endl <<endl;
+														cout << "============================================================================" << endl;
+														cout << "| 0 - Regresar al menu catalogo       |        1 - Agregar otro Libro  	|" << endl;
+														cout << "============================================================================" << endl <<endl;
 														cout << " Seleccione una opcion: " << endl; 
 														
 														opcionSubmenu =  fnValidateIntegerSubmenu();
@@ -351,7 +354,7 @@ int main() {
 												
 													break;
 												}
-												case 3:{
+												case 3:{ //Editar Libro
 														int opcionSubmenu = 2;
 														int opcionEditarLibro= 0;
 														
@@ -370,9 +373,9 @@ int main() {
 															//====================================================================================================================	
 															//								SUBMENU
 															//=====================================================================================================================
-															cout << "==========================================================================" << endl;
-															cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
-															cout << "==========================================================================" << endl <<endl;
+															cout << "============================================================================" << endl;
+															cout << "| 0 - Regresar al menu catalogo       |        1 - Editar otro Libro  	|" << endl;
+															cout << "============================================================================" << endl <<endl;
 															cout << " Seleccione una opcion: " << endl; 
 															
 															opcionSubmenu =  fnValidateIntegerSubmenu();
@@ -383,7 +386,37 @@ int main() {
 													
 													break;
 												}
-												case 4:{
+												case 4:{ //Eliminar Libro
+														int opcionSubmenu = 2;
+														int opcionEliminarLibro= 0;
+														
+														do{
+														
+															catalogoLibros.listarLibros();
+															
+															cout << endl;
+															cout << "Selecciona el Id del libro a eliminar: " << endl;
+															opcionEliminarLibro =  fnValidateInteger();
+															
+															
+															catalogoLibros.eliminarLibro(opcionEliminarLibro);
+															
+														
+															
+															//====================================================================================================================	
+															//								SUBMENU
+															//=====================================================================================================================
+															cout << "============================================================================" << endl;
+															cout << "| 0 - Regresar al menu catalogo       |        1 - Eliminar otro Libro  	|" << endl;
+															cout << "============================================================================" << endl <<endl <<endl;
+															cout << " Seleccione una opcion: " << endl; 
+															
+															opcionSubmenu =  fnValidateIntegerSubmenu();
+															
+															system("cls");
+														}while(opcionSubmenu !=0);
+												
+				
 													break;
 												}
 												case 5:{
@@ -396,7 +429,7 @@ int main() {
 							}	//end while catalogo libros
 									break;	
 								}
-								case 3:{ // Catalogo Clientes 
+								case 3:{ //===================================== Catalogo Clientes ========================================================= 
 										
 										int opcionCatalogoClientes = 0;
 										
@@ -420,7 +453,7 @@ int main() {
 										switch(opcionCatalogoClientes){
 											
 											
-												case 1: {
+												case 1: { // Listar libros
 														int opcionSubmenu = 2;
 														
 														do{
@@ -430,9 +463,9 @@ int main() {
 														//====================================================================================================================	
 														//								SUBMENU
 														//=====================================================================================================================
-														cout << "==========================================================================" << endl;
-														cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
-														cout << "==========================================================================" << endl <<endl;
+														cout << "==============================================================================" << endl;
+														cout << "| 0 - Regresar al menu catalogo       |        1 - Volver a listar clientes  |" << endl;
+														cout << "==============================================================================" << endl <<endl;
 														cout << " Seleccione una opcion: " << endl; 
 														
 														opcionSubmenu =  fnValidateIntegerSubmenu();
@@ -444,7 +477,7 @@ int main() {
 													
 													break;
 												}
-												case 2:{
+												case 2:{// Agregar Cliente
 														int opcionSubmenu = 2;
 														
 														do{
@@ -454,9 +487,9 @@ int main() {
 														//====================================================================================================================	
 														//								SUBMENU
 														//=====================================================================================================================
-														cout << "==========================================================================" << endl;
-														cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
-														cout << "==========================================================================" << endl <<endl;
+														cout << "===========================================================================" << endl;
+														cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Cliente  |" << endl;
+														cout << "===========================================================================" << endl <<endl<<endl;
 														cout << " Seleccione una opcion: " << endl; 
 														
 														opcionSubmenu =  fnValidateIntegerSubmenu();
@@ -468,7 +501,7 @@ int main() {
 													
 													break;
 												}
-												case 3:{
+												case 3:{ // Editar Cliente
 													
 														int opcionSubmenu = 2;
 														int opcionEditarCliente= 0;
@@ -488,7 +521,7 @@ int main() {
 															//								SUBMENU
 															//=====================================================================================================================
 															cout << "==========================================================================" << endl;
-															cout << "| 0 - Regresar al menu principal       |        1 - Agregar otro Libro  |" << endl;
+															cout << "| 0 - Regresar al menu catalogo       |        1 - Editar otro Cliente   |" << endl;
 															cout << "==========================================================================" << endl <<endl;
 															cout << " Seleccione una opcion: " << endl; 
 															
@@ -500,7 +533,36 @@ int main() {
 													
 													break;
 												}
-												case 4:{
+												case 4:{ // Eliminar Cliente 
+												
+														int opcionSubmenu = 2;
+														int opcionEliminarCliente= 0;
+														
+														do{
+														
+															catalogoClientes.listarClientes();
+							
+															
+															cout << "Selecciona el Id del cliente a eliminar: " << endl;
+															opcionEliminarCliente =  fnValidateInteger();
+															
+															catalogoClientes.eliminarCliente(opcionEliminarCliente);
+															cout <<endl;  
+															
+															//====================================================================================================================	
+															//								SUBMENU
+															//=====================================================================================================================
+															cout << "==========================================================================" << endl;
+															cout << "| 0 - Regresar al menu catalogo       |        1 - Editar otro Cliente   |" << endl;
+															cout << "==========================================================================" << endl <<endl;
+															cout << " Seleccione una opcion: " << endl; 
+															
+															opcionSubmenu =  fnValidateIntegerSubmenu();
+															
+															system("cls");
+														}while(opcionSubmenu !=0);
+			
+																
 													break;
 												}
 												case 5:{

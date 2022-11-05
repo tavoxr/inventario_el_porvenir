@@ -139,7 +139,30 @@ void CatalogoClientes::editarCliente(int id){
 
 void CatalogoClientes::eliminarCliente(int id){
 
-
-
+		for(int i=0; i < clientes.size(); i++){
+			
+			if(clientes[i].getId() == id){
+				
+				std::cout << "=========================================================================" << std::endl;
+				std::cout << "  Cliente Eliminado Exitosamente" << std::endl;
+				std::cout << "=========================================================================" << std::endl << std::endl;
+				std::cout << " Id: " << clientes[i].getId() << std::endl;
+				std::cout << " Nombre: " << clientes[i].getNombre() << std::endl;
+				std::cout << " NIT: " << clientes[i].getNIT() << std::endl;
+				std::cout << " Edad: " << clientes[i].getEdad()  << std::endl;
+				std::cout << " Telefono: " << clientes[i].getTelefono() << std::endl;
+				std::cout << "=========================================================================" << std::endl;
+				std::cout << std::endl << std::endl << std::endl;
+					
+				
+				
+				clientes.erase(clientes.begin() + i);	
+				break;
+				
+			}
+			
+		}
+		
+	
 }
 
