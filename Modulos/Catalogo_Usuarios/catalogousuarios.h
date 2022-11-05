@@ -26,6 +26,9 @@ class CatalogoUsuarios
 			
 			 void agregarUsuario();
 			 void listarUsuarios();
+			 void editarUsuarios(int id);
+			 void eliminarUsuarios(int id);
+			 
 };
 
 #endif

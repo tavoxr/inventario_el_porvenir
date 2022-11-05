@@ -42,6 +42,10 @@ class Cliente
 			std::string getTelefono();
 			
 		
+			//--------Metodos ------------------
+		
+			//Agregar Libro
+			Cliente crearCliente();
 			
 };
 
